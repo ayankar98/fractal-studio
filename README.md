@@ -23,6 +23,7 @@ npm install
 npm run dev
 npm run build
 npm run lint
+npm test
 ```
 
 Run these commands from the `fractal-studio` directory. See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) for environment details and troubleshooting.

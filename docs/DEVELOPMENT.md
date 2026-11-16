@@ -18,6 +18,10 @@ npm run lint
 npm run test
 ```
 
+The test suite uses Vitest with Testing Library and jsdom for React UI behavior,
+plus pure domain and mocked WebGL renderer tests. See
+[`TEST_REPORT.md`](TEST_REPORT.md) for the latest run and its known failed cases.
+
 ## Troubleshooting
 
 - On Windows PowerShell, the `npm.ps1` shim may be blocked by execution policy. Use `npm.cmd` for the same npm commands in that shell.
@@ -26,4 +30,6 @@ npm run test
 
 ## Verification record
 
-The declared npm dependencies installed successfully and npm reported zero known vulnerabilities. Build, lint, and deterministic math/navigation checks have passed. The built-in Node test runner uses Node's experimental TypeScript stripping flag to avoid an additional test dependency. Headless Edge with SwiftShader rendered the normal overview. The user's hardware GPU and other browsers still need validation.
+The current test run and failure details are recorded in
+[`TEST_REPORT.md`](TEST_REPORT.md). UI tests mock WebGL and browser-only APIs;
+they do not replace validation against the user's physical GPU and browser.

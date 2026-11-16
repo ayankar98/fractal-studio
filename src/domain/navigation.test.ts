@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { minimumStableScale, panView, zoomViewAt } from './navigation.ts'
 import { pixelToComplex } from '../fractals/mandelbrot.ts'
 import type { ViewState } from './renderConfig.ts'
