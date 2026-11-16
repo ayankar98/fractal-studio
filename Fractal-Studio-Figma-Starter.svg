@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="900" viewBox="0 0 1440 900">
+  <title>Fractal Studio — editable desktop UI starter</title>
+  <desc>1440 by 900 desktop app mockup. Import into Figma, then ungroup to edit individual interface elements.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101116"/><stop offset="1" stop-color="#08090c"/></linearGradient>
+    <linearGradient id="headerGlow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b9f477"/><stop offset=".52" stop-color="#6bc7c9"/><stop offset="1" stop-color="#a77cff"/></linearGradient>
+    <linearGradient id="fractalColor" x1=".12" y1=".9" x2=".9" y2=".1"><stop stop-color="#ff6b35"/><stop offset=".24" stop-color="#f9c74f"/><stop offset=".46" stop-color="#a4e36f"/><stop offset=".68" stop-color="#4cc9d0"/><stop offset=".84" stop-color="#6378ff"/><stop offset="1" stop-color="#e779ff"/></linearGradient>
+    <radialGradient id="canvasGlow"><stop stop-color="#262031"/><stop offset=".66" stop-color="#12141c"/><stop offset="1" stop-color="#0c0d11"/></radialGradient>
+    <radialGradient id="core"><stop stop-color="#090a0d" offset=".55"/><stop stop-color="#090a0d" offset=".7"/><stop stop-color="#f9c74f" offset=".705"/><stop stop-color="#ff6b35" offset=".735"/><stop stop-color="#6bc7c9" offset=".76"/><stop stop-color="#657cff" offset=".785"/><stop stop-color="#12131a" offset=".82"/><stop stop-color="#090a0d" offset="1"/></radialGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <g id="app-frame">
+    <rect width="1440" height="900" rx="16" fill="url(#background)"/>
+    <rect x="1" y="1" width="1438" height="898" rx="15" fill="none" stroke="#2a2c33"/>
+
+    <g id="top-navigation">
+      <rect x="1" y="1" width="1438" height="67" rx="15" fill="#111217"/>
+      <path d="M1 67H1439" stroke="#292b32"/>
+      <circle cx="37" cy="34" r="17" fill="#17191e" stroke="#a7e66e" stroke-opacity=".8"/>
+      <text x="37" y="40" text-anchor="middle" fill="#c7fa8a" font-family="Calibri, Arial, sans-serif" font-size="18" font-weight="700">F</text>
+      <text x="66" y="39" fill="#f4f5f6" font-family="Calibri, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5">FRACTAL</text>
+      <text x="133" y="39" fill="#8e929c" font-family="Calibri, Arial, sans-serif" font-size="15" letter-spacing="1.4">STUDIO</text>
+      <circle cx="574" cy="34" r="4" fill="#b7f278"/>
+      <text x="589" y="38" fill="#b6bac5" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.3">GENERATIVE CANVAS</text>
+      <text x="725" y="38" fill="#555963" font-family="Calibri, Arial, sans-serif" font-size="11">/</text>
+      <text x="741" y="38" fill="#c7c9d0" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.3">MANDELBROT 01</text>
+      <rect x="1282" y="15" width="132" height="38" rx="7" fill="#b9f477"/>
+      <text x="1348" y="39" text-anchor="middle" fill="#171a12" font-family="Calibri, Arial, sans-serif" font-size="12" font-weight="700">Export artwork ↗</text>
+    </g>
+
+    <g id="left-sidebar">
+      <rect x="1" y="68" width="222" height="831" fill="#111217"/>
+      <path d="M223 68V899" stroke="#292b32"/>
+      <text x="25" y="103" fill="#858995" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.8">COLLECTION</text>
+      <text x="25" y="137" fill="#aeb2be" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.4">FRACTAL FAMILY</text>
+      <rect x="24" y="151" width="174" height="42" rx="6" fill="#191b21" stroke="#3a3d46"/>
+      <circle cx="40" cy="172" r="3" fill="#b9f477"/>
+      <text x="52" y="176" fill="#f0f1f3" font-family="Calibri, Arial, sans-serif" font-size="13">Mandelbrot / Multibrot</text>
+      <path d="m181 169 4 4 4-4" fill="none" stroke="#9095a0" stroke-width="1.5"/>
+      <rect x="24" y="203" width="174" height="42" rx="6" fill="#15171c" stroke="#292b32"/>
+      <circle cx="40" cy="224" r="3" fill="#626773"/>
+      <text x="52" y="228" fill="#b8bbc4" font-family="Calibri, Arial, sans-serif" font-size="13">Julia set</text>
+      <text x="25" y="270" fill="#747985" font-family="Calibri, Arial, sans-serif" font-size="11">z₀ = 0 · c varies by pixel</text>
+      <path d="M24 294H198" stroke="#292b32"/>
+      <text x="25" y="328" fill="#858995" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.8">VIEW</text>
+      <text x="25" y="357" fill="#aeb2be" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.4">VIEW PRESET</text>
+      <rect x="24" y="371" width="174" height="42" rx="6" fill="#191b21" stroke="#3a3d46"/>
+      <text x="38" y="396" fill="#e4e5e9" font-family="Calibri, Arial, sans-serif" font-size="12">Full set overview</text>
+      <path d="m181 388 4 4 4-4" fill="none" stroke="#9095a0" stroke-width="1.5"/>
+      <rect x="24" y="431" width="174" height="42" rx="6" fill="#15171c" stroke="#343740"/>
+      <text x="39" y="457" fill="#d4d6dc" font-family="Calibri, Arial, sans-serif" font-size="12">↺  Reset composition</text>
+      <text x="25" y="505" fill="#8f939e" font-family="Calibri, Arial, sans-serif" font-size="11" letter-spacing=".4">SCROLL</text>
+      <text x="78" y="505" fill="#c2c5cd" font-family="Calibri, Arial, sans-serif" font-size="11">Zoom to cursor</text>
+      <text x="25" y="533" fill="#8f939e" font-family="Calibri, Arial, sans-serif" font-size="11" letter-spacing=".4">DRAG</text>
+      <text x="78" y="533" fill="#c2c5cd" font-family="Calibri, Arial, sans-serif" font-size="11">Pan canvas</text>
+      <g id="gpu-status">
+        <path d="M24 852H198" stroke="#292b32"/>
+        <circle cx="30" cy="875" r="3" fill="#b9f477"/>
+        <text x="41" y="879" fill="#b8d99a" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.2">GPU ENGINE ONLINE</text>
+        <text x="41" y="896" fill="#777c88" font-family="Calibri, Arial, sans-serif" font-size="10">WebGL 2 / GLSL ES 3.00</text>
+      </g>
+    </g>
+
+    <g id="fractal-workspace">
+      <text x="250" y="103" fill="#7d8390" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.7">MANDELBROT / MULTIBROT</text>
+      <text x="250" y="128" fill="#f1f2f4" font-family="Calibri, Arial, sans-serif" font-size="15" font-weight="600">Full set overview  ·  Power 2</text>
+      <text x="1107" y="105" fill="#89909d" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing=".7">300 ITER</text>
+      <circle cx="1170" cy="101" r="1.5" fill="#555a64"/>
+      <text x="1183" y="105" fill="#89909d" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing=".7">3.55e-3 SCALE</text>
+      <g id="editable-fractal-preview">
+        <rect x="250" y="148" width="900" height="675" rx="5" fill="url(#canvasGlow)" stroke="#343741"/>
+        <ellipse cx="700" cy="486" rx="260" ry="235" fill="url(#fractalColor)" opacity=".25" filter="url(#softGlow)"/>
+        <g fill="none" stroke="url(#fractalColor)" stroke-linecap="round" opacity=".83">
+          <path d="M417 465 C442 345 551 282 668 292 C780 270 919 337 971 438 C1022 539 944 659 840 693 C742 734 615 700 553 638 C494 580 484 491 526 426 C568 359 666 337 738 367 C814 397 854 472 837 536 C818 607 739 635 678 607 C622 581 610 522 636 482 C660 444 711 438 743 461 C773 483 773 520 751 539" stroke-width="8"/>
+          <path d="M402 452 C428 329 541 270 664 278 C789 258 935 327 987 434 C1040 546 956 677 845 710 C740 750 599 714 538 642 C479 573 472 482 516 415 C564 341 670 319 750 354 C835 391 878 477 857 550 C835 625 744 658 671 625 C602 594 584 519 617 469 C648 422 713 410 757 440 C798 468 805 520 774 552" stroke-width="3" opacity=".72"/>
+          <path d="M433 476 C459 364 560 307 669 308 C773 292 902 352 949 445 C995 536 925 636 831 670 C744 703 635 673 577 619 C525 568 516 495 551 441 C587 386 668 367 727 391 C790 416 823 478 811 530 C797 585 733 613 684 590 C642 571 627 529 647 497 C665 467 704 458 733 475" stroke-width="2" opacity=".65"/>
+        </g>
+        <g fill="none" stroke="url(#fractalColor)" stroke-width="2" opacity=".65">
+          <path d="M455 368 C411 340 389 305 400 279 C412 250 445 252 458 277 C469 300 452 320 431 316 C416 313 414 296 424 288"/>
+          <path d="M899 360 C943 329 964 294 951 268 C938 241 906 245 894 270 C883 293 901 311 921 306 C936 302 936 285 926 278"/>
+          <path d="M486 632 C453 672 444 711 463 731 C482 751 510 736 507 711 C504 689 482 681 468 694 C458 704 466 719 478 719"/>
+          <path d="M889 629 C924 669 935 708 917 730 C899 752 870 737 873 712 C876 690 898 682 912 696 C922 706 914 720 902 721"/>
+          <path d="M594 316 C572 280 574 249 595 238 C615 227 635 246 627 265 C620 281 602 279 594 266"/>
+          <path d="M797 315 C819 280 817 249 796 238 C776 227 756 246 764 265 C771 281 789 279 797 266"/>
+        </g>
+        <path d="M700 342 C737 342 763 361 784 387 C809 418 827 452 834 487 C848 550 818 609 770 638 C724 667 662 662 614 632 C568 603 542 556 547 508 C551 468 571 435 593 405 C618 370 654 342 700 342Z" fill="url(#core)" stroke="#e3a94f" stroke-opacity=".5" stroke-width="1.5"/>
+        <ellipse cx="576" cy="501" rx="58" ry="44" fill="#090a0d" stroke="#ffd166" stroke-width="4"/>
+        <ellipse cx="824" cy="501" rx="58" ry="44" fill="#090a0d" stroke="#5b8cff" stroke-width="4"/>
+        <path d="M700 343 C681 312 687 284 706 271 C727 257 748 276 740 297 C734 313 717 315 708 304" fill="none" stroke="#ffc857" stroke-width="5" stroke-linecap="round"/>
+        <path d="M700 641 C681 672 687 700 706 713 C727 727 748 708 740 687 C734 671 717 669 708 680" fill="none" stroke="#62d9db" stroke-width="5" stroke-linecap="round"/>
+        <rect x="262" y="788" width="143" height="24" rx="4" fill="#08090c" fill-opacity=".82"/>
+        <text x="274" y="804" fill="#d6d8de" font-family="Consolas, monospace" font-size="10">-0.50000 / 0.00000</text>
+      </g>
+      <text x="250" y="848" fill="#7c8290" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.2">WHEEL TO EXPLORE</text>
+      <text x="664" y="848" fill="#7c8290" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.2">DRAG TO TRAVERSE</text>
+      <text x="1030" y="848" fill="#7c8290" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.2">FLOAT32 PRECISION</text>
+    </g>
+
+    <g id="adjustments-panel">
+      <rect x="1175" y="68" width="264" height="831" fill="#111217"/>
+      <path d="M1175 68V899" stroke="#292b32"/>
+      <text x="1196" y="103" fill="#9296a1" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.8">ADJUSTMENTS</text>
+      <text x="1408" y="103" text-anchor="end" fill="#717681" font-family="Calibri, Arial, sans-serif" font-size="10">05</text>
+      <g id="iteration-control">
+        <text x="1196" y="145" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Iterations</text>
+        <text x="1408" y="145" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="12" font-weight="700">300</text>
+        <path d="M1196 167H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/>
+        <path d="M1196 167H1261" stroke="#b9f477" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="1261" cy="167" r="6" fill="#b9f477" stroke="#111217" stroke-width="2"/>
+        <text x="1196" y="186" fill="#777c87" font-family="Calibri, Arial, sans-serif" font-size="9">50</text><text x="1408" y="186" text-anchor="end" fill="#777c87" font-family="Calibri, Arial, sans-serif" font-size="9">1200</text>
+      </g>
+      <path d="M1196 207H1410" stroke="#292b32"/>
+      <g id="power-control">
+        <text x="1196" y="240" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Equation power p</text>
+        <text x="1408" y="240" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="12" font-weight="700">2</text>
+        <path d="M1196 262H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><path d="M1196 262H1220" stroke="#b9f477" stroke-width="3" stroke-linecap="round"/><circle cx="1220" cy="262" r="6" fill="#b9f477" stroke="#111217" stroke-width="2"/>
+        <text x="1196" y="281" fill="#777c87" font-family="Calibri, Arial, sans-serif" font-size="9">2 quadratic</text><text x="1408" y="281" text-anchor="end" fill="#777c87" font-family="Calibri, Arial, sans-serif" font-size="9">8</text>
+      </g>
+      <path d="M1196 302H1410" stroke="#292b32"/>
+      <g id="color-preset-control">
+        <text x="1196" y="336" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Color field</text>
+        <text x="1408" y="336" text-anchor="end" fill="#777c87" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.2">PRESET</text>
+        <rect x="1196" y="352" width="212" height="40" rx="5" fill="#191b21" stroke="#3a3d46"/>
+        <text x="1210" y="377" fill="#e4e5e9" font-family="Calibri, Arial, sans-serif" font-size="12">Solar flare</text>
+        <rect x="1365" y="364" width="26" height="14" rx="7" fill="url(#headerGlow)"/>
+        <path d="m1393 369 4 4 4-4" fill="none" stroke="#9095a0" stroke-width="1.5"/>
+      </g>
+      <path d="M1196 411H1410" stroke="#292b32"/>
+      <g id="color-tuning-controls">
+        <text x="1196" y="445" fill="#aeb2be" font-family="Calibri, Arial, sans-serif" font-size="10" letter-spacing="1.3">COLOR TUNING</text>
+        <text x="1196" y="477" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Color frequency</text><text x="1408" y="477" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="11">1.00×</text>
+        <path d="M1196 493H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><path d="M1196 493H1266" stroke="#b9f477" stroke-width="3" stroke-linecap="round"/><circle cx="1266" cy="493" r="5" fill="#b9f477"/>
+        <text x="1196" y="526" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Color phase</text><text x="1408" y="526" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="11">0.00</text>
+        <path d="M1196 542H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><circle cx="1196" cy="542" r="5" fill="#b9f477"/>
+        <text x="1196" y="575" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Brightness</text><text x="1408" y="575" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="11">1.00</text>
+        <path d="M1196 591H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><path d="M1196 591H1302" stroke="#b9f477" stroke-width="3" stroke-linecap="round"/><circle cx="1302" cy="591" r="5" fill="#b9f477"/>
+        <text x="1196" y="624" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Contrast</text><text x="1408" y="624" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="11">1.00</text>
+        <path d="M1196 640H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><path d="M1196 640H1283" stroke="#b9f477" stroke-width="3" stroke-linecap="round"/><circle cx="1283" cy="640" r="5" fill="#b9f477"/>
+        <text x="1196" y="673" fill="#e8e9ed" font-family="Calibri, Arial, sans-serif" font-size="12">Contour overlay</text><text x="1408" y="673" text-anchor="end" fill="#b9f477" font-family="Calibri, Arial, sans-serif" font-size="11">0%</text>
+        <path d="M1196 689H1408" stroke="#3a3d46" stroke-width="3" stroke-linecap="round"/><circle cx="1196" cy="689" r="5" fill="#b9f477"/>
+        <text x="1196" y="716" fill="#7f8490" font-family="Calibri, Arial, sans-serif" font-size="10">Add fine highlights along iteration bands.</text>
+        <rect x="1196" y="733" width="142" height="30" rx="5" fill="#17191e" stroke="#363941"/>
+        <text x="1267" y="752" text-anchor="middle" fill="#d2d4db" font-family="Calibri, Arial, sans-serif" font-size="10">Reset color controls</text>
+      </g>
+      <g id="render-status">
+        <path d="M1196 791H1410" stroke="#292b32"/>
+        <text x="1196" y="820" fill="#858995" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1.5">RENDER STATUS</text>
+        <text x="1196" y="846" fill="#c4c7cf" font-family="Calibri, Arial, sans-serif" font-size="11">WebGL 2 renderer ready.</text>
+        <text x="1196" y="878" fill="#747985" font-family="Calibri, Arial, sans-serif" font-size="9" letter-spacing="1">CENTER X</text><text x="1408" y="878" text-anchor="end" fill="#c7c9d0" font-family="Consolas, monospace" font-size="9">-0.500000</text>
+      </g>
+    </g>
+  </g>
+</svg>
