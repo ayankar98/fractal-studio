@@ -228,6 +228,7 @@ describe('Fractal Studio UI', () => {
     const workspace = screen.getByRole('region', { name: 'Interactive fractal canvas' })
     expect(document.fullscreenElement).toBe(workspace)
     fireEvent.click(screen.getByRole('button', { name: 'Export image' }))
+    fireEvent.click(screen.getByRole('menuitem', { name: 'PNG' }))
 
     await Promise.resolve()
     await Promise.resolve()

@@ -65,6 +65,7 @@ function App() {
   const userRequestedFullscreenExitRef = useRef(false)
   const rendererRef = useRef<WebGLMandelbrotRenderer | null>(null)
   const dragRef = useRef<DragStart | null>(null)
+  const exportMenuRef = useRef<HTMLDivElement>(null)
   const [view, setView] = useState<ViewState>(DEFAULT_VIEW)
   const [family, setFamily] = useState<FractalFamily>('mandelbrot')
   const [maxIterations, setMaxIterations] = useState(DEFAULT_MANDELBROT_CONFIG.maxIterations)
@@ -85,6 +86,7 @@ function App() {
   const [message, setMessage] = useState('Preparing WebGL renderer...')
   const [exportFormat, setExportFormat] = useState<'png' | 'jpeg'>('png')
   const [exporting, setExporting] = useState(false)
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false)
   const [collapsed, setCollapsed] = useState({ parameters: false, coloring: false, export: false })
   const customPaletteStops = useMemo(
     () => [hexToRgb(customColorStart), hexToRgb(customColorMiddle), hexToRgb(customColorEnd)] as const,
@@ -105,6 +107,15 @@ function App() {
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
+
+  useEffect(() => {
+    if (!isExportMenuOpen) return
+    const closeExportMenu = (event: Event) => {
+      if (!exportMenuRef.current?.contains(event.target as Node)) setIsExportMenuOpen(false)
+    }
+    document.addEventListener('pointerdown', closeExportMenu)
+    return () => document.removeEventListener('pointerdown', closeExportMenu)
+  }, [isExportMenuOpen])
 
   useEffect(() => {
     const syncFullscreenState = () => {
@@ -291,14 +302,14 @@ function App() {
     }
   }
 
-  const exportImage = async () => {
+  const exportImage = async (format: 'png' | 'jpeg' = exportFormat) => {
     if (exporting) return
-    const exportQuality = exportQualityFor(exportFormat)
+    const exportQuality = exportQualityFor(format)
     exportingRef.current = true
     preserveFullscreenDuringExportRef.current = document.fullscreenElement === workspaceRef.current
     userRequestedFullscreenExitRef.current = false
     setExporting(true)
-    setMessage(`Rendering ${EXPORT_WIDTH} x ${EXPORT_HEIGHT} ${exportFormat.toUpperCase()} with preview-matching sampling...`)
+    setMessage(`Rendering ${EXPORT_WIDTH} x ${EXPORT_HEIGHT} ${format.toUpperCase()} with preview-matching sampling...`)
     await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
 
     const exportCanvas = document.createElement('canvas')
@@ -341,7 +352,7 @@ function App() {
         throw new Error('The export graphics context was lost while rendering.')
       }
 
-      const mimeType = exportFormat === 'png' ? 'image/png' : 'image/jpeg'
+      const mimeType = format === 'png' ? 'image/png' : 'image/jpeg'
       const blob = await new Promise<Blob>((resolve, reject) => {
         exportCanvas.toBlob((created) => {
           if (!created) reject(new Error('The browser could not encode the rendered image.'))
@@ -358,10 +369,10 @@ function App() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `fractal-studio-3840x2160.${exportFormat === 'png' ? 'png' : 'jpg'}`
+      link.download = `fractal-studio-3840x2160.${format === 'png' ? 'png' : 'jpg'}`
       link.click()
       window.setTimeout(() => URL.revokeObjectURL(url), 30_000)
-      setMessage(`Saved ${EXPORT_WIDTH} x ${EXPORT_HEIGHT} ${exportFormat.toUpperCase()} image with preview-matching sampling.`)
+      setMessage(`Saved ${EXPORT_WIDTH} x ${EXPORT_HEIGHT} ${format.toUpperCase()} image with preview-matching sampling.`)
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Image export failed.')
     } finally {
@@ -373,11 +384,24 @@ function App() {
     }
   }
 
+  const selectFullscreenExport = (format: 'png' | 'jpeg') => {
+    setExportFormat(format)
+    setIsExportMenuOpen(false)
+    void exportImage(format)
+  }
+
   const familyName = FAMILY_OPTIONS.find((item) => item.id === family)?.name ?? 'Mandelbrot / Multibrot'
   const toggleSection = (section: keyof typeof collapsed) => setCollapsed((current) => ({ ...current, [section]: !current[section] }))
 
   return (
     <main className="studio-shell" id="top">
+      <div className="mobile-block" role="status" aria-live="polite">
+        <div className="mobile-block-card">
+          <span className="mobile-block-eyebrow">Fractal Studio</span>
+          <h1>Desktop screen required</h1>
+          <p>This interactive fractal canvas is currently available on desktop screens only. Please open it on a larger display.</p>
+        </div>
+      </div>
       <header className="topbar">
         <a className="brand" href="/" aria-label="Fractal Studio home" onClick={(event) => navigate(event, '/')}><span className="brand-mark" aria-hidden="true">F</span><span>Fractal <span className="brand-light">Studio</span></span></a>
         <nav className="header-nav" aria-label="Main navigation">
@@ -405,7 +429,7 @@ function App() {
                 <div className="canvas-actions">
                   <button className="canvas-action" type="button" onClick={resetView} aria-label="Reset view"><ResetIcon /><span>Reset view</span></button>
                   <button className="canvas-action" type="button" onClick={toggleFullscreen} disabled={!document.fullscreenEnabled} aria-label={isFullscreen ? 'Exit fullscreen view' : 'Enter fullscreen view'} title={isFullscreen ? 'Exit fullscreen view' : 'Fullscreen view'}><FullscreenIcon expanded={isFullscreen} /><span>{isFullscreen ? 'Exit fullscreen' : 'Fullscreen view'}</span></button>
-                  {isFullscreen && <button className="canvas-action canvas-export-action" type="button" onClick={exportImage} disabled={!ready || exporting} aria-label={exporting ? 'Rendering export' : 'Export image'} title={exporting ? 'Rendering export' : 'Export image'}><DownloadIcon /><span>{exporting ? 'Rendering...' : 'Export'}</span></button>}
+                  {isFullscreen && <div ref={exportMenuRef} className="canvas-export-menu"><button className="canvas-action canvas-export-action" type="button" onClick={() => setIsExportMenuOpen((open) => !open)} disabled={!ready || exporting} aria-expanded={isExportMenuOpen} aria-haspopup="menu" aria-controls="fullscreen-export-options" aria-label={exporting ? 'Rendering export' : 'Export image'} title={exporting ? 'Rendering export' : 'Export image'}><DownloadIcon /><span>{exporting ? 'Rendering...' : 'Export'}</span><ChevronIcon className="canvas-export-chevron" open={isExportMenuOpen} /></button>{isExportMenuOpen && <div id="fullscreen-export-options" className="canvas-export-options" role="menu" aria-label="Export format"><button type="button" role="menuitem" onClick={() => selectFullscreenExport('png')} disabled={exporting}>PNG</button><button type="button" role="menuitem" onClick={() => selectFullscreenExport('jpeg')} disabled={exporting}>JPEG</button></div>}</div>}
                 </div>
               </div>
               <div className="canvas-subtitle-row"><p className="canvas-subtitle">{family === 'julia' ? 'Julia set with fixed c = ' + constantReal.toFixed(3) + ' ' + (constantImaginary < 0 ? '-' : '+') + ' ' + Math.abs(constantImaginary).toFixed(3) + 'i' : 'Classic Mandelbrot set with power ' + power}</p><div className="canvas-meta"><span><b>Frame</b> {view.width} x {view.height}</span><span><b>Scale</b> {view.unitsPerPixel.toExponential(2)} / px</span></div></div>
@@ -439,7 +463,7 @@ function App() {
           <section className="settings-card"><button className="card-heading" type="button" aria-expanded={!collapsed.export} aria-controls="export-content" onClick={() => toggleSection('export')}><span className="card-icon"><DownloadIcon /></span><span>Export</span><ChevronIcon className="card-chevron" open={!collapsed.export} /></button><div id="export-content" className="card-body export-content" hidden={collapsed.export}>
             <div className="control-heading"><label htmlFor="format">Output format</label></div><div className="select-wrap format-select"><select id="format" value={exportFormat} onChange={(event) => setExportFormat(event.currentTarget.value as 'png' | 'jpeg')}><option value="png">PNG / Lossless</option><option value="jpeg">JPEG / High quality</option></select><span className="select-chevron"><ChevronIcon /></span></div>
             <div className="resolution-row"><span>Resolution</span><b>3840 x 2160 (4K UHD)</b></div><p className="export-note">Rendered at 3840 x 2160 with 1x sampling for a crisper export.</p><div className="export-status"><span className="field-label">Render status</span><p role="status" aria-live="polite">{message}</p></div><div className="parameter-readout"><span>Center X <b>{view.centerX.toFixed(6)}</b></span><span>Center Y <b>{view.centerY.toFixed(6)}</b></span></div>
-            <button className="export-button" type="button" onClick={exportImage} disabled={!ready || exporting}>{exporting ? <><span className="button-spinner" /> Rendering 4K...</> : <><DownloadIcon /> Export</>}</button>
+            <button className="export-button" type="button" onClick={() => void exportImage()} disabled={!ready || exporting}>{exporting ? <><span className="button-spinner" /> Rendering 4K...</> : <><DownloadIcon /> Export</>}</button>
           </div></section>
         </aside>
       </div> : <section className="coming-page" aria-labelledby="coming-title">
