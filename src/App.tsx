@@ -403,7 +403,7 @@ function App() {
         </div>
       </div>
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Fractal Studio home" onClick={(event) => navigate(event, '/')}><span className="brand-mark" aria-hidden="true">F</span><span>Fractal <span className="brand-light">Studio</span></span></a>
+        <a className="brand" href="/" aria-label="Fractal Studio home" onClick={(event) => navigate(event, '/')}><span>Fractal <span className="brand-light">Studio</span></span><span className="brand-beta">BETA</span></a>
         <nav className="header-nav" aria-label="Main navigation">
           <a className={'nav-link' + (page === 'canvas' ? ' nav-link-active' : '')} href="/" aria-current={page === 'canvas' ? 'page' : undefined} onClick={(event) => navigate(event, '/')}><CanvasIcon />Generative Canvas</a>
           <a className={'nav-link' + (page === 'gallery' ? ' nav-link-active' : '')} href="/gallery" aria-current={page === 'gallery' ? 'page' : undefined} onClick={(event) => navigate(event, '/gallery')}><GalleryIcon />Gallery</a>
