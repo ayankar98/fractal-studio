@@ -381,9 +381,9 @@ function App() {
       <header className="topbar">
         <a className="brand" href="/" aria-label="Fractal Studio home" onClick={(event) => navigate(event, '/')}><span className="brand-mark" aria-hidden="true">F</span><span>Fractal <span className="brand-light">Studio</span></span></a>
         <nav className="header-nav" aria-label="Main navigation">
-          <a className={'nav-link' + (page === 'canvas' ? ' nav-link-active' : '')} href="/" aria-current={page === 'canvas' ? 'page' : undefined} onClick={(event) => navigate(event, '/')}><span className="live-dot" />Generative Canvas</a>
-          <a className={'nav-link' + (page === 'gallery' ? ' nav-link-active' : '')} href="/gallery" aria-current={page === 'gallery' ? 'page' : undefined} onClick={(event) => navigate(event, '/gallery')}><GalleryIcon />Gallery</a>
-          <a className={'nav-link' + (page === 'learn' ? ' nav-link-active' : '')} href="/learn" aria-current={page === 'learn' ? 'page' : undefined} onClick={(event) => navigate(event, '/learn')}><BookIcon />Learn</a>
+          <a className={'nav-link' + (page === 'canvas' ? ' nav-link-active' : '')} href="/" aria-current={page === 'canvas' ? 'page' : undefined} onClick={(event) => navigate(event, '/')}><span className="nav-badge nav-badge-canvas" aria-hidden="true" />Generative Canvas</a>
+          <a className={'nav-link' + (page === 'gallery' ? ' nav-link-active' : '')} href="/gallery" aria-current={page === 'gallery' ? 'page' : undefined} onClick={(event) => navigate(event, '/gallery')}><span className="nav-badge nav-badge-gallery" aria-hidden="true" />Gallery</a>
+          <a className={'nav-link' + (page === 'learn' ? ' nav-link-active' : '')} href="/learn" aria-current={page === 'learn' ? 'page' : undefined} onClick={(event) => navigate(event, '/learn')}><span className="nav-badge nav-badge-learn" aria-hidden="true" />Learn</a>
         </nav>
       </header>
       {page === 'canvas' ? <div className="studio-layout">
@@ -465,3 +465,4 @@ function GalleryIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><rec
 function BookIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5c-2-2-4.5-2-7-1v12c2.5-1 5-1 7 1m0-12c2-2 4.5-2 7-1v12c-2.5-1-5-1-7 1m0-12v12" /></svg> }
 function ResetIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7V3m0 4h4M4.5 7A6.5 6.5 0 1 1 3.8 12" /></svg> }
 function FullscreenIcon({ expanded }: { expanded: boolean }) { return expanded ? <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4M7 7 3 3m10 4 4-4M7 13l-4 4m10-4 4 4" /></svg> : <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" /></svg> }
+
