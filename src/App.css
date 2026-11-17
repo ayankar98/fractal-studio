@@ -14,11 +14,6 @@ button { -webkit-tap-highlight-color: transparent; }
 .nav-link { min-height:40px; display:flex; align-items:center; justify-content:center; gap:8px; padding:9px 14px; border-radius:9px; color:var(--secondary); font-size:13px; font-weight:550; text-decoration:none; white-space:nowrap; }
 .nav-link-active { color:#f3e9ff; background:#25153c; }
 .nav-link svg { width:18px; height:18px; flex:0 0 18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
-.nav-badge { --badge-core:#36d98a; --badge-glow:rgba(54,217,138,.55); width:10px; height:10px; flex:0 0 10px; border-radius:50%; background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.9) 0 18%,rgba(255,255,255,.35) 19%,transparent 23%),var(--badge-core); box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 14px var(--badge-glow); }
-.nav-badge-canvas { --badge-core:#36d98a; --badge-glow:rgba(54,217,138,.55); }
-.nav-badge-gallery { --badge-core:#6cc7ff; --badge-glow:rgba(108,199,255,.52); }
-.nav-badge-learn { --badge-core:#c89bff; --badge-glow:rgba(200,155,255,.55); }
-.nav-link-active .nav-badge { box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 16px var(--badge-glow); }
 .coming-page { flex:1; display:grid; place-items:center; padding:32px 20px; background:radial-gradient(ellipse at 50% 35%,#171126 0%,#0b0e16 45%,var(--bg) 78%); }
 .coming-card { width:min(100%,520px); padding:44px 38px; border:1px solid var(--line); border-radius:16px; background:#10141fe8; text-align:center; box-shadow:0 24px 80px #0005; }
 .coming-icon { width:54px; height:54px; display:grid; place-items:center; margin:0 auto 22px; border:1px solid #563685; border-radius:15px; color:#d7b4ff; background:#25153c; }

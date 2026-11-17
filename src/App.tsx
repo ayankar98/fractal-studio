@@ -381,9 +381,9 @@ function App() {
       <header className="topbar">
         <a className="brand" href="/" aria-label="Fractal Studio home" onClick={(event) => navigate(event, '/')}><span className="brand-mark" aria-hidden="true">F</span><span>Fractal <span className="brand-light">Studio</span></span></a>
         <nav className="header-nav" aria-label="Main navigation">
-          <a className={'nav-link' + (page === 'canvas' ? ' nav-link-active' : '')} href="/" aria-current={page === 'canvas' ? 'page' : undefined} onClick={(event) => navigate(event, '/')}><span className="nav-badge nav-badge-canvas" aria-hidden="true" />Generative Canvas</a>
-          <a className={'nav-link' + (page === 'gallery' ? ' nav-link-active' : '')} href="/gallery" aria-current={page === 'gallery' ? 'page' : undefined} onClick={(event) => navigate(event, '/gallery')}><span className="nav-badge nav-badge-gallery" aria-hidden="true" />Gallery</a>
-          <a className={'nav-link' + (page === 'learn' ? ' nav-link-active' : '')} href="/learn" aria-current={page === 'learn' ? 'page' : undefined} onClick={(event) => navigate(event, '/learn')}><span className="nav-badge nav-badge-learn" aria-hidden="true" />Learn</a>
+          <a className={'nav-link' + (page === 'canvas' ? ' nav-link-active' : '')} href="/" aria-current={page === 'canvas' ? 'page' : undefined} onClick={(event) => navigate(event, '/')}><CanvasIcon />Generative Canvas</a>
+          <a className={'nav-link' + (page === 'gallery' ? ' nav-link-active' : '')} href="/gallery" aria-current={page === 'gallery' ? 'page' : undefined} onClick={(event) => navigate(event, '/gallery')}><GalleryIcon />Gallery</a>
+          <a className={'nav-link' + (page === 'learn' ? ' nav-link-active' : '')} href="/learn" aria-current={page === 'learn' ? 'page' : undefined} onClick={(event) => navigate(event, '/learn')}><BookIcon />Learn</a>
         </nav>
       </header>
       {page === 'canvas' ? <div className="studio-layout">
@@ -461,6 +461,7 @@ function ChevronIcon({ className = '', open = false }: { className?: string; ope
 function SlidersIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14M7 3v4m6 1v4m-4 1v4" /></svg> }
 function PaletteIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 0 15h1.2a1.5 1.5 0 0 0 1.1-2.5 1.4 1.4 0 0 1 1-2.4h1.1A3.1 3.1 0 0 0 17.5 9.5 7 7 0 0 0 10 2.5Z" /><circle cx="6.2" cy="9" r=".8" /><circle cx="8.8" cy="5.8" r=".8" /><circle cx="12.6" cy="6.2" r=".8" /></svg> }
 function DownloadIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v10m-4-4 4 4 4-4M3.5 14v3h13v-3" /></svg> }
+function CanvasIcon() { return <svg className="canvas-icon" viewBox="0 0 20 20" aria-hidden="true" stroke="#ffffff" fill="none" strokeWidth="2.2" strokeLinecap="square" strokeLinejoin="miter"><path d="M4 4h12v12H4zM6.5 6.5h7v7h-7zM9 9h2v2H9z" /></svg> }
 function GalleryIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3" width="15" height="14" rx="2" /><circle cx="7" cy="7.5" r="1.3" /><path d="m4 14 4-4 2.5 2 2.5-3 3 5" /></svg> }
 function BookIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5c-2-2-4.5-2-7-1v12c2.5-1 5-1 7 1m0-12c2-2 4.5-2 7-1v12c-2.5-1-5-1-7 1m0-12v12" /></svg> }
 function ResetIcon() { return <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7V3m0 4h4M4.5 7A6.5 6.5 0 1 1 3.8 12" /></svg> }
