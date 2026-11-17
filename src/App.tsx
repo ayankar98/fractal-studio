@@ -399,7 +399,7 @@ function App() {
         <div className="mobile-block-card">
           <span className="mobile-block-eyebrow">Fractal Studio</span>
           <h1>Desktop screen required</h1>
-          <p>This interactive fractal canvas is currently available on desktop screens only. Please open it on a larger display.</p>
+          <p>This interactive fractal canvas is currently available on desktop screens only.</p>
         </div>
       </div>
       <header className="topbar">
