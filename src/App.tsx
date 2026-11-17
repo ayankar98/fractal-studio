@@ -49,6 +49,13 @@ interface DragStart {
   readonly view: ViewState
 }
 
+interface PinchStart {
+  readonly distance: number
+  readonly x: number
+  readonly y: number
+  readonly view: ViewState
+}
+
 type StudioPage = 'canvas' | 'gallery' | 'learn'
 
 function pageFromPath(pathname: string): StudioPage {
@@ -65,6 +72,8 @@ function App() {
   const userRequestedFullscreenExitRef = useRef(false)
   const rendererRef = useRef<WebGLMandelbrotRenderer | null>(null)
   const dragRef = useRef<DragStart | null>(null)
+  const pointerPositionsRef = useRef(new Map<number, { x: number; y: number }>())
+  const pinchRef = useRef<PinchStart | null>(null)
   const [view, setView] = useState<ViewState>(DEFAULT_VIEW)
   const [family, setFamily] = useState<FractalFamily>('mandelbrot')
   const [maxIterations, setMaxIterations] = useState(DEFAULT_MANDELBROT_CONFIG.maxIterations)
@@ -256,36 +265,85 @@ function App() {
     event.preventDefault()
     const bounds = event.currentTarget.getBoundingClientRect()
     const factor = Math.exp(Math.max(-500, Math.min(500, event.deltaY)) * 0.001)
-    if (factor < 1 && view.unitsPerPixel * factor < minimumStableScale(view)) {
-      setMessage('Zoom limit reached to keep the image accurate. Pan to explore another area.')
+    zoomAt(factor, event.clientX - bounds.left, event.clientY - bounds.top)
+  }
+
+  const zoomAt = (factor: number, pixelX: number, pixelY: number) => {
+    setView((current) => {
+      if (factor < 1 && current.unitsPerPixel * factor < minimumStableScale(current)) {
+        setMessage('Zoom limit reached to keep the image accurate. Pan to explore another area.')
+      }
+      return zoomViewAt(current, pixelX, pixelY, factor)
+    })
+  }
+
+  const distanceBetweenPointers = () => {
+    const pointers = [...pointerPositionsRef.current.values()]
+    if (pointers.length < 2) return 0
+    return Math.hypot(pointers[1].x - pointers[0].x, pointers[1].y - pointers[0].y)
+  }
+
+  const midpointBetweenPointers = () => {
+    const pointers = [...pointerPositionsRef.current.values()]
+    if (pointers.length < 2) return null
+    return {
+      x: (pointers[0].x + pointers[1].x) / 2,
+      y: (pointers[0].y + pointers[1].y) / 2,
     }
-    setView((current) => zoomViewAt(
-      current,
-      event.clientX - bounds.left,
-      event.clientY - bounds.top,
-      factor,
-    ))
   }
 
   const handlePointerDown = (event: PointerEvent<HTMLCanvasElement>) => {
     if (event.button !== 0) return
     event.currentTarget.setPointerCapture(event.pointerId)
-    dragRef.current = {
-      pointerId: event.pointerId,
-      x: event.clientX,
-      y: event.clientY,
-      view,
+    pointerPositionsRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    if (pointerPositionsRef.current.size >= 2) {
+      dragRef.current = null
+      const midpoint = midpointBetweenPointers()
+      const distance = distanceBetweenPointers()
+      if (midpoint && distance > 0) {
+        pinchRef.current = { distance, x: midpoint.x, y: midpoint.y, view }
+      }
+      return
     }
+    dragRef.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, view }
   }
 
   const handlePointerMove = (event: PointerEvent<HTMLCanvasElement>) => {
+    if (pointerPositionsRef.current.has(event.pointerId)) {
+      pointerPositionsRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    }
+    const pinch = pinchRef.current
+    if (pinch && pointerPositionsRef.current.size >= 2) {
+      const distance = distanceBetweenPointers()
+      if (distance > 0) {
+        const factor = pinch.distance / distance
+        const bounds = event.currentTarget.getBoundingClientRect()
+        setView(() => zoomViewAt(
+          pinch.view,
+          pinch.x - bounds.left,
+          pinch.y - bounds.top,
+          factor,
+        ))
+      }
+      return
+    }
     const drag = dragRef.current
     if (!drag || drag.pointerId !== event.pointerId) return
     setView(panView(drag.view, event.clientX - drag.x, event.clientY - drag.y))
   }
 
   const endPointer = (event: PointerEvent<HTMLCanvasElement>) => {
-    if (dragRef.current?.pointerId === event.pointerId) dragRef.current = null
+    pointerPositionsRef.current.delete(event.pointerId)
+    if (pinchRef.current) {
+      pinchRef.current = null
+      dragRef.current = null
+      const remaining = pointerPositionsRef.current.entries().next().value as [number, { x: number; y: number }] | undefined
+      if (remaining) {
+        dragRef.current = { pointerId: remaining[0], x: remaining[1].x, y: remaining[1].y, view }
+      }
+    } else if (dragRef.current?.pointerId === event.pointerId) {
+      dragRef.current = null
+    }
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId)
     }
@@ -411,7 +469,7 @@ function App() {
               <div className="canvas-subtitle-row"><p className="canvas-subtitle">{family === 'julia' ? 'Julia set with fixed c = ' + constantReal.toFixed(3) + ' ' + (constantImaginary < 0 ? '-' : '+') + ' ' + Math.abs(constantImaginary).toFixed(3) + 'i' : 'Classic Mandelbrot set with power ' + power}</p><div className="canvas-meta"><span><b>Frame</b> {view.width} x {view.height}</span><span><b>Scale</b> {view.unitsPerPixel.toExponential(2)} / px</span></div></div>
             </div>
           </div>
-          <div className="canvas-frame"><canvas ref={canvasRef} className="fractal-canvas" aria-label={familyName + ' rendering. Scroll to zoom - drag to pan.'} onWheel={handleWheel} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={endPointer} onPointerCancel={endPointer} onLostPointerCapture={() => { dragRef.current = null }} />{!ready && <div className="canvas-message" role="status"><span>{message}</span></div>}<div className="coordinate-tag">x: {view.centerX.toFixed(6)} <span /> y: {view.centerY.toFixed(6)}</div></div>
+          <div className="canvas-frame"><canvas ref={canvasRef} className="fractal-canvas" aria-label={familyName + ' rendering. Scroll to zoom, pinch to zoom on touch screens, and drag to pan.'} onWheel={handleWheel} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={endPointer} onPointerCancel={endPointer} onLostPointerCapture={() => { dragRef.current = null; pointerPositionsRef.current.clear(); pinchRef.current = null }} />{!ready && <div className="canvas-message" role="status"><span>{message}</span></div>}<div className="coordinate-tag">x: {view.centerX.toFixed(6)} <span /> y: {view.centerY.toFixed(6)}</div></div>
         </section>
         <aside className="right-panel" aria-label="Fractal settings">
           <section className="settings-card"><button className="card-heading" type="button" aria-expanded={!collapsed.parameters} aria-controls="parameters-content" onClick={() => toggleSection('parameters')}><span className="card-icon"><SlidersIcon /></span><span>Parameters</span><ChevronIcon className="card-chevron" open={!collapsed.parameters} /></button><div id="parameters-content" className="card-body" hidden={collapsed.parameters}>
