@@ -77,13 +77,15 @@ vec3 renderSample(vec2 samplePosition) {
   vec2 offset = samplePosition - 0.5 * u_resolution;
   vec2 point = u_center + vec2(offset.x, offset.y) * u_unitsPerPixel;
   vec2 c = u_family == 1 ? u_juliaConstant : point;
-  int degree = u_power;
+  int degree = u_family == 2 ? 2 : u_power;
   vec2 z = u_family == 1 ? point : vec2(0.0);
   float escapeRadius = max(2.0, length(c));
   float escapedAt = float(u_maxIterations);
   bool escaped = false;
   for (int i = 0; i < u_maxIterations; i++) {
-    vec2 base = z;
+    // Burning Ship reflects each orbit coordinate across both axes before
+    // applying its quadratic recurrence.
+    vec2 base = u_family == 2 ? abs(z) : z;
     vec2 powered = vec2(1.0, 0.0);
     for (int exponent = 0; exponent < 8; exponent++) {
       if (exponent >= degree) break;

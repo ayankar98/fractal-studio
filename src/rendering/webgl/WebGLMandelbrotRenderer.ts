@@ -185,7 +185,7 @@ export class WebGLMandelbrotRenderer {
     gl.uniform1i(uniforms.maxIterations, parameters.fractal.maxIterations)
     gl.uniform1i(uniforms.power, parameters.fractal.power ?? 2)
     const family = parameters.fractal.family ?? 'mandelbrot'
-    gl.uniform1i(uniforms.family, family === 'julia' ? 1 : 0)
+    gl.uniform1i(uniforms.family, family === 'julia' ? 1 : family === 'burning-ship' ? 2 : 0)
     gl.uniform2f(
       uniforms.juliaConstant,
       parameters.fractal.constantReal ?? -0.4,

@@ -12,7 +12,7 @@ export interface ViewState {
   readonly height: number
 }
 
-export type FractalFamily = 'mandelbrot' | 'julia'
+export type FractalFamily = 'mandelbrot' | 'julia' | 'burning-ship'
 
 /** Parameters for a supported complex-plane recurrence. */
 export interface FractalConfig {
@@ -81,7 +81,7 @@ export function validateFractalConfig(config: FractalConfig): void {
     throw new RangeError('Equation power must be an integer from 2 to 8.')
   }
   const family = config.family ?? 'mandelbrot'
-  if (!['mandelbrot', 'julia'].includes(family)) {
+  if (!['mandelbrot', 'julia', 'burning-ship'].includes(family)) {
     throw new RangeError('Unknown fractal family.')
   }
   if (!Number.isFinite(config.constantReal ?? -0.4)

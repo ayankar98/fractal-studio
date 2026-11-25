@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+  <title id="title">Measuring the same coastline at three scales</title>
+  <desc id="desc">A jagged coastline is followed by long, medium and short measuring segments. Smaller segments follow more bends.</desc>
+  <rect width="1000" height="360" rx="18" fill="#0b0d15"/>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <g fill="#e5e9f2" font-size="18" font-weight="600"><text x="180" y="45">Large step</text><text x="500" y="45">Medium step</text><text x="820" y="45">Fine step</text></g>
+    <g fill="#a8b1c2" font-size="14"><text x="180" y="320">few bends included</text><text x="500" y="320">more bends included</text><text x="820" y="320">most bends followed</text></g>
+  </g>
+  <g fill="none" stroke="#6685a5" stroke-width="3" stroke-linejoin="round">
+    <path d="M50 240L78 205L103 219L132 170L157 194L182 140L207 165L236 112L263 150L289 128L315 190"/>
+    <path d="M370 240L398 205L423 219L452 170L477 194L502 140L527 165L556 112L583 150L609 128L635 190"/>
+    <path d="M690 240L718 205L743 219L772 170L797 194L822 140L847 165L876 112L903 150L929 128L955 190"/>
+  </g>
+  <g fill="none" stroke="#c39aff" stroke-linecap="round" stroke-width="7">
+    <path d="M50 240L157 194L263 150L315 190"/>
+    <path d="M370 240L423 219L477 194L502 140L556 112L609 128L635 190"/>
+    <path d="M690 240L718 205L743 219L772 170L797 194L822 140L847 165L876 112L903 150L929 128L955 190"/>
+  </g>
+  <g fill="#c39aff"><circle cx="50" cy="240" r="5"/><circle cx="157" cy="194" r="5"/><circle cx="263" cy="150" r="5"/><circle cx="315" cy="190" r="5"/><circle cx="370" cy="240" r="5"/><circle cx="423" cy="219" r="5"/><circle cx="477" cy="194" r="5"/><circle cx="502" cy="140" r="5"/><circle cx="556" cy="112" r="5"/><circle cx="609" cy="128" r="5"/><circle cx="635" cy="190" r="5"/><circle cx="690" cy="240" r="5"/><circle cx="718" cy="205" r="5"/><circle cx="743" cy="219" r="5"/><circle cx="772" cy="170" r="5"/><circle cx="797" cy="194" r="5"/><circle cx="822" cy="140" r="5"/><circle cx="847" cy="165" r="5"/><circle cx="876" cy="112" r="5"/><circle cx="903" cy="150" r="5"/><circle cx="929" cy="128" r="5"/><circle cx="955" cy="190" r="5"/></g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" role="img" aria-labelledby="title desc">
+  <title id="title">A branching rule repeated over four stages</title>
+  <desc id="desc">Four diagrams show a line splitting into two branches, then repeating the same split to create a tree.</desc>
+  <rect width="1000" height="330" rx="18" fill="#0b0d15"/>
+  <g fill="#a8b1c2" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+    <text x="125" y="42">Stage 1</text><text x="375" y="42">Stage 2</text><text x="625" y="42">Stage 3</text><text x="875" y="42">Stage 4</text>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <g stroke="#c39aff"><path d="M125 260V105"/></g>
+    <g stroke="#e1b7ff"><path d="M375 260V165M375 165L325 95M375 165L425 95"/></g>
+    <g stroke="#8dd8ff"><path d="M625 260V195M625 195L585 140M625 195L665 140M585 140L555 95M585 140L610 95M665 140L640 95M665 140L695 95"/></g>
+    <g stroke="#8dd8ff"><path d="M875 260V215M875 215L845 175M875 215L905 175M845 175L825 140M845 175L865 140M905 175L885 140M905 175L925 140M825 140L810 112M825 140L840 112M865 140L850 112M865 140L880 112M885 140L870 112M885 140L900 112M925 140L910 112M925 140L940 112"/></g>
+  </g>
+  <g fill="#778297" font-family="system-ui, sans-serif" font-size="14" text-anchor="middle">
+    <text x="125" y="300">one line</text><text x="375" y="300">one split</text><text x="625" y="300">rule repeats</text><text x="875" y="300">more detail</text>
+  </g>
+</svg>

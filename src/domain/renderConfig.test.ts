@@ -34,7 +34,7 @@ test('fractal validation enforces iteration limits and integer equation powers',
 })
 
 test('fractal validation rejects unknown families and non-finite Julia parameters', () => {
-  assert.throws(() => validateFractalConfig({ maxIterations: 100, family: 'burning-ship' as never }), /Unknown fractal family/)
+  assert.doesNotThrow(() => validateFractalConfig({ maxIterations: 100, family: 'burning-ship' }))
   assert.throws(() => validateFractalConfig({ maxIterations: 100, family: 'julia', constantReal: Number.NaN }), /finite real and imaginary/)
   assert.throws(() => validateFractalConfig({ maxIterations: 100, family: 'julia', constantImaginary: Number.POSITIVE_INFINITY }), /finite real and imaginary/)
   assert.doesNotThrow(() => validateFractalConfig({ maxIterations: 100, family: 'julia', constantReal: -2, constantImaginary: 2 }))

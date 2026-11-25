@@ -59,7 +59,8 @@ export function iterateFractal(
   }
 
   const family = config.family ?? 'mandelbrot'
-  const power = config.power ?? 2
+  const burningShip = family === 'burning-ship'
+  const power = burningShip ? 2 : config.power ?? 2
   const julia = family === 'julia'
   const mapReal = julia ? (config.constantReal ?? -0.4) : realC
   const mapImaginary = julia ? (config.constantImaginary ?? 0.6) : imaginaryC
@@ -69,8 +70,8 @@ export function iterateFractal(
   let iterations = 0
 
   while (iterations < config.maxIterations) {
-    const baseReal = realZ
-    const baseImaginary = imaginaryZ
+    const baseReal = burningShip ? Math.abs(realZ) : realZ
+    const baseImaginary = burningShip ? Math.abs(imaginaryZ) : imaginaryZ
     let poweredReal = 1
     let poweredImaginary = 0
     for (let exponent = 0; exponent < power; exponent += 1) {

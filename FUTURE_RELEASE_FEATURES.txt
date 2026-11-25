@@ -1,0 +1,7 @@
+Future Release Features
+=======================
+
+3D fractals
+- Add a 3D fractal renderer, starting with a Mandelbulb or Mandelbox.
+- Include camera orbit, pan, and zoom controls with depth-aware lighting and shading.
+- Support fractal parameters and image export for 3D views.
